@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Local Storage</title>
+    <title>Session Storage</title>
   </head>
   <body>
     <div class="container">
@@ -19,7 +19,7 @@
 
   <script type="text/javascript">
 
-    localStorage.clear();
+    sessionStorage.clear()
 
     function nextPage() {
       storeText();
@@ -28,9 +28,9 @@
 
     function storeText() {
       var inputName = document.getElementById("name");
-      localStorage.setItem("storageName", inputName.value);
+      sessionStorage.setItem("storageName", inputName.value);
       var inputEmail = document.getElementById("email");
-      localStorage.setItem("storageEmail", inputEmail.value);
+      sessionStorage.setItem("storageEmail", inputEmail.value);
     }
 
     //Event Listener
@@ -40,7 +40,7 @@
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
       fileReader.addEventListener("load", () => {
-      localStorage.setItem("imageURL", fileReader.result);
+      sessionStorage.setItem("imageURL", fileReader.result);
       });
     });
   </script>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Display</title>
+    
+  </head>
+  <body>
+    <p id="nameShow"></p>
+    <p id="emailShow"></p>
+    <image id="imageShow"></image>
+   
+    <script>
+      var outputName = sessionStorage.getItem("storageName");
+      document.getElementById("nameShow").innerHTML = outputName;
+      var outputEmail = sessionStorage.getItem("storageEmail");
+      document.getElementById("emailShow").innerHTML = outputEmail;
+      var url = sessionStorage.getItem("imageURL");
+      document.getElementById("imageShow").src = url;
+
+      //Creating and assigning image to an image placeholder
+      //const img = new Image();
+      //img.src = url;
+      //document.body.appendChild(img);
+    </script>
+  </body>
+</html>
