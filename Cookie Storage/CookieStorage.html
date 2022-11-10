@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Local Storage</title>
+    <title>Cookie Storage</title>
   </head>
   <body>
     <div class="container">
       <form action="#">
-        <input type="name" id="name" placeholder="Name" />
-        <input type="email" id="email" placeholder="Email" />
+        <input type="text" id="name" placeholder="Name" />
+        <input type="text" id="email" placeholder="Email" />
         <input type="file" id="image" />
       </form>
       <button onclick="nextPage()" type="button">Show Data</button>
@@ -18,8 +18,6 @@
   </body>
 
   <script type="text/javascript">
-    
-    localStorage.clear();
 
     function nextPage() {
       storeText();
@@ -28,9 +26,16 @@
 
     function storeText() {
       var inputName = document.getElementById("name");
-      localStorage.setItem("storageName", inputName.value);
+      setCookie("name", inputName.value, 1)
       var inputEmail = document.getElementById("email");
-      localStorage.setItem("storageEmail", inputEmail.value);
+      setCookie("email", inputEmail.value, 1)
+    }
+
+    function setCookie(cname, cvalue, exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      let expires = "expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
 
     //Event Listener
@@ -41,6 +46,7 @@
       fileReader.readAsDataURL(file);
       fileReader.addEventListener("load", () => {
       localStorage.setItem("imageURL", fileReader.result);
+      setCookie("imageURL", fileReader.result, 1);
       });
     });
   </script>
