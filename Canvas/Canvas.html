@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas</title>
+  </head>
+  <body>
+   <canvas width="500" height="300" id="main">The browser doesn't support the canvas element</canvas>
+  </body>
+
+  <script type="text/javascript">
+    let canvas = document.getElementById("main")
+    let ctx = main.getContext('2d');
+    // set fill and stroke styles
+    ctx.fillStyle = '#F0DB4F';
+    ctx.strokeStyle = 'red';
+
+    // draw a rectangle with fill and stroke
+    ctx.fillRect(50, 50, 150, 100);
+    ctx.strokeRect(50, 50, 150, 100);
+  </script>
+</html>
