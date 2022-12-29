@@ -1,3 +1,4 @@
+require("dotenv").config;
 var express = require("express");
 var { graphqlHTTP } = require("express-graphql");
 var { buildSchema } = require("graphql");
@@ -64,8 +65,6 @@ app.use(
 app.listen(4000);
 console.log("Running a GraphQL API server at http://localhost:4000/graphql");
 
-
-
 const client = new MongoClient(uri);
 async function run() {
   try {
@@ -74,10 +73,23 @@ async function run() {
     // Establish and verify connection
     await client.db("admin").command({ ping: 1 });
     console.log("Connected successfully to server");
+
+    const database = client.db("insertDB");
+    const haiku = database.collection("haiku");
+    // create a document to insert
+    const doc = {
+      title: "Record of a Shriveled Datum",
+      content: "No bytes, no problem. Just insert a document, in MongoDB",
+    }
+    const result = await haiku.insertOne(doc);
+    console.log(`A document was inserted with the _id: ${result.insertedId}`);
+
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
   }
 }
 run().catch(console.dir);
+
+
 
