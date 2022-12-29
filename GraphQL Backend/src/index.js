@@ -2,6 +2,9 @@ var express = require("express");
 var { graphqlHTTP } = require("express-graphql");
 var { buildSchema } = require("graphql");
 
+const { MongoClient } = require("mongodb");
+const uri =  "mongodb+srv://saad:jammus121@trialcluster.idskb.mongodb.net/test";
+
 // Construct a schema, using GraphQL schema language
 var schema = buildSchema(`
   type Query {
@@ -60,3 +63,21 @@ app.use(
 );
 app.listen(4000);
 console.log("Running a GraphQL API server at http://localhost:4000/graphql");
+
+
+
+const client = new MongoClient(uri);
+async function run() {
+  try {
+    // Connect the client to the server (optional starting in v4.7)
+    await client.connect();
+    // Establish and verify connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Connected successfully to server");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+
